@@ -1,19 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Photo } from "./photo";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-const URI = "https://gateway.marvel.com:443/v1/public/characters";
-const API_KEY = "8e01e7c969b0bff1276901db16d8914f";
-const HASH = "18e094aaf511ffaaa208b11e9ad2486d";
-const TS = "1585787204";
+const URI = 'https://gateway.marvel.com:443/v1/public/characters';
 
-@Injectable({ providedIn: "root" })
-export class PhotoService {
-  constructor(private http: HttpClient) {}
+@Injectable({ providedIn: 'root' })
+export class PhotoService{
+    constructor(private http: HttpClient){}
 
-  listCharacters(nameCharacter: string) {
-    return this.http.get<Photo[]>(
-      `${URI}?limit=10&apikey=${API_KEY}&hash=${HASH}&ts=${TS}`
-    );
-  }
+    listCharacters(nameCharacter: string){
+        return this.http.get<any>(`${URI}?limit=5&apikey=f0f3234103aa31daafe6eb214244a30a&hash=eaf2c6396159ff17191b0a2dcca19cb8&ts=1585789368`)
+    }
 }

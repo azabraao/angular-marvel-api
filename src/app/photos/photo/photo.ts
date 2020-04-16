@@ -1,6 +1,6 @@
-export interface Photo {
-  id: number;
-  name: string;
-  url: string;
-  description: string;
+export interface Photo{
+    id: number
+    name: string
+    url: string
+    desciption: string
 }
