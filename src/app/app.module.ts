@@ -6,7 +6,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PhotosModule } from "./photos/photos.module";
 import { LayoutModule } from "./layout/layout.module";
-import { ContatoComponent } from './contato/contato.component';
+import { ContatoComponent } from "./contato/contato.component";
+import { PostsModule } from "./posts/posts.module";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent, ContatoComponent],
@@ -16,6 +18,8 @@ import { ContatoComponent } from './contato/contato.component';
     PhotosModule,
     ErrorModule,
     LayoutModule,
+    PostsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -8,23 +8,28 @@ import { Component, OnInit } from "@angular/core";
 export class InsideHeaderComponent implements OnInit {
   public route1: String = "/photos";
   public route2: String = "/photos-search";
+  public routes: any = [];
 
-  routes = [
-    {
-      text: "Lista de Fotos",
-      route: "/photos",
-    },
-    {
-      text: "Pesquisar Fotos",
-      route: "/photos-search",
-    },
-    {
-      text: "Contato",
-      route: "/contato",
-    },
-  ];
-
-  constructor() {}
+  constructor() {
+    this.routes = [
+      {
+        label: "Lista de Fotos",
+        link: "/photos",
+      },
+      {
+        label: "Pesquisar Fotos",
+        link: "/photos-search",
+      },
+      {
+        label: "Contato",
+        link: "/contato",
+      },
+      {
+        label: "Tópicos",
+        link: "/topics",
+      },
+    ];
+  }
 
   ngOnInit() {}
 }

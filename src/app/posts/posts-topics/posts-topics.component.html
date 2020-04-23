@@ -1,0 +1,25 @@
+<div class="container topics-container">
+  <div class="topic-card" *ngFor="let topic of topics">
+    <div class="topic-card__avatar">
+      <img [src]="topic.avatar" alt="" />
+    </div>
+    <div class="topic-card__title">
+      <h4>{{ topic.name }}</h4>
+      <p>{{ topic.desc }}</p>
+
+      <div class="topic-card__owner">
+        <div class="topic-card__owner-pic">
+          <img [src]="topic.owner.avatar" alt="" />
+        </div>
+        <div class="topic-card__owner-infos">
+          <div class="topic-card__owner-title">
+            {{ topic.owner.name }}
+          </div>
+          <div class="topic-card__owner-nickname">
+            @{{ topic.owner.nickName }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

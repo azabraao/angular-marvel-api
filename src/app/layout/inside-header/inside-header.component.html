@@ -13,13 +13,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li *ngFor="let route of routes" class="nav-item">
-        <a
-          class="nav-link"
-          [routerLink]="route.route"
-          routerLinkActive="active"
-        >
-          {{ route.text }}
+      <li *ngFor="let route of routes" [title]="route.label" class="nav-item">
+        <a class="nav-link" [routerLink]="route.link" routerLinkActive="active">
+          {{ route.label }}
         </a>
       </li>
     </ul>
