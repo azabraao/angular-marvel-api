@@ -11,8 +11,11 @@ export class PostsTopicsService {
   constructor(private httpClient: HttpClient) {}
 
   public getList(): Observable<any> {
-    console.log(`da uma olhada: ${this.apiUrl}`);
     let endpoint: string = `${this.apiUrl}/topics`;
     return this.httpClient.get(endpoint);
+  }
+  getById(topicId): Promise<any> {
+    let endpoint = `${this.apiUrl}/topics/${topicId}`;
+    return this.httpClient.get(endpoint).toPromise();
   }
 }

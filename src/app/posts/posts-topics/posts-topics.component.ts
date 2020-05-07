@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { PostsTopicsService } from "src/app/services/posts-topics.service";
+import { interval } from "rxjs";
 
 @Component({
   selector: "app-posts-topics",
@@ -12,6 +13,13 @@ export class PostsTopicsComponent implements OnInit {
   constructor(private postsTopicsService: PostsTopicsService) {}
 
   ngOnInit() {
+    let novoObservable = interval(5000);
+
+    novoObservable.subscribe((times) => {
+      this.loadTopics();
+    });
+  }
+  loadTopics() {
     this.postsTopicsService.getList().subscribe(
       (successRes) => {
         this.topics = successRes.data;

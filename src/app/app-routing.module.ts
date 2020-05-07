@@ -6,6 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { InsideLayoutComponent } from "./layout/inside-layout/inside-layout.component";
 import { ContatoComponent } from "./contato/contato.component";
 import { PostsTopicsComponent } from "./posts/posts-topics/posts-topics.component";
+import { PostsTopicDetailComponent } from "./posts/posts-topic-detail/posts-topic-detail.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: "contato", component: ContatoComponent },
       { path: "photos", component: PhotosListComponent },
       { path: "photos-search", component: PhotoSearchComponent },
+      { path: "topics/:topicId", component: PostsTopicDetailComponent },
       { path: "topics", component: PostsTopicsComponent },
       { path: "", redirectTo: "photos", pathMatch: "full" },
       { path: "**", component: NotFoundComponent },
