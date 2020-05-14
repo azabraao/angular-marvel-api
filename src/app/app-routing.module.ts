@@ -7,8 +7,15 @@ import { InsideLayoutComponent } from "./layout/inside-layout/inside-layout.comp
 import { ContatoComponent } from "./contato/contato.component";
 import { PostsTopicsComponent } from "./posts/posts-topics/posts-topics.component";
 import { PostsTopicDetailComponent } from "./posts/posts-topic-detail/posts-topic-detail.component";
+import { AuthLoginComponent } from "./auth/auth-login/auth-login.component";
+import { OutsideLayoutComponent } from "./layout/outside-layout/outside-layout.component";
 
 const routes: Routes = [
+  {
+    path: "",
+    component: OutsideLayoutComponent,
+    children: [{ path: "login", component: AuthLoginComponent }],
+  },
   {
     path: "",
     component: InsideLayoutComponent,

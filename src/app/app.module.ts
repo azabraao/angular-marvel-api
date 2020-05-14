@@ -9,6 +9,7 @@ import { LayoutModule } from "./layout/layout.module";
 import { ContatoComponent } from "./contato/contato.component";
 import { PostsModule } from "./posts/posts.module";
 import { HttpClientModule } from "@angular/common/http";
+import { AuthModule } from "./auth/auth.module";
 
 @NgModule({
   declarations: [AppComponent, ContatoComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from "@angular/common/http";
     LayoutModule,
     PostsModule,
     HttpClientModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
