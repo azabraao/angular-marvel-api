@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 
 // Importe as ferramentas do ReactiveFormsModule
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AuthService } from "src/app/services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-auth-login",
@@ -11,60 +13,84 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 })
 export class AuthLoginComponent implements OnInit {
   // Crie uma variável para armazenar o form
-  public exampleForm: FormGroup;
+  public loginForm: FormGroup;
 
   // Crie uma variável para armazenar os dados
-  public objectData: any = {};
+  public data: any = {};
 
-  constructor() {
+  constructor(
+    // Solicite a injeção do serviço:
+    private authService: AuthService,
+    private router: Router
+  ) {
     // Crie um novo FormGroup com seus FormControls e Validators
-    this.exampleForm = new FormGroup({
-      name_input: new FormControl("", [Validators.required]),
-      email_input: new FormControl("", [Validators.required, Validators.email]),
-      age_input: new FormControl(1, [
+    this.loginForm = new FormGroup({
+      nickName: new FormControl("", [Validators.required]),
+      password: new FormControl("", [
         Validators.required,
-        Validators.min(1),
-        Validators.max(2),
+        Validators.minLength(6),
       ]),
-      gender_input: new FormControl("male", [Validators.required]),
-      pt_input: new FormControl(false),
-      en_input: new FormControl(false),
-      terms_input: new FormControl(null, [Validators.required]),
     });
   }
 
   ngOnInit() {}
 
   // Função que será chamada pela diretiva (click) no HTML
-  myFunction() {
-    // Exibindo os dados no console
-    console.log("dados", this.exampleForm.value);
+  async sendLogin() {
+    // Exibe um alerta para caso o formulário não esteja válido
+    if (!this.loginForm.valid) {
+      alert("Preencha os campos corretamente.");
+      // Para a execução da função
+      return;
+    } else {
+      try {
+        let formValue = this.loginForm.value;
+        let res = await this.authService.login(formValue);
 
-    // Salvando os dados em uma variável
-    this.objectData = this.exampleForm.value;
+        this.authService.setLoggedUser(res.data);
+        console.log("res.data", res.data);
 
-    // Exibindo se formulário é valido
-    console.log("Válido?", this.exampleForm.valid);
+        this.router.navigate(["/topics"]);
+      } catch (error) {
+        console.error(error);
+        alert("Deu erro, tenta de novo");
+      }
+    }
 
-    // Exibindo os erros no formulário
-    console.log("Erros", this.exampleForm.errors);
+    // Exibe os dados para caso o formulário esteja válido
+    console.log(this.loginForm.value);
+  }
 
-    // Exibindo o valor de um campo
-    console.log(
-      "Valor do campo name_input",
-      this.exampleForm.get("name_input").value
-    );
+  // Função que verifica erro em um campo
+  getFieldError(formControlName) {
+    // Recupera o campo pelo seu nome
+    let control = this.loginForm.get(formControlName);
 
-    // Exibindo se um campo é válido
-    console.log(
-      "Campo name_input é válido?",
-      this.exampleForm.get("name_input").valid
-    );
+    // Retorna false caso o campo não foi encontrado
+    if (!control) return false;
 
-    // Exibindo erros de um campo
-    console.log(
-      "Erros no campo name_input",
-      this.exampleForm.get("name_input").valid
-    );
+    // Retorna false caso campo ainda não sofreu interação
+    if (control.untouched) return false;
+
+    // Retorna false caso campo está válido
+    if (control.valid) return false;
+
+    // Retorna mensagem para caso validação de required
+    if (control.hasError("required")) {
+      return "Este campo é obrigatório.";
+    }
+
+    // Retorna mensagem para caso validação de minLength
+    if (control.hasError("minlength")) {
+      let minlength = control.getError("minlength");
+      return (
+        "O mínimo de caracteres para este campo é " +
+        minlength.requiredLength +
+        "."
+      );
+    }
+
+    // Caso campo é inválido mas erro não foi capturado acima
+    return "Campo inválido.";
   }
 }

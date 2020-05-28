@@ -10,6 +10,7 @@ import { ContatoComponent } from "./contato/contato.component";
 import { PostsModule } from "./posts/posts.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthModule } from "./auth/auth.module";
+import { AuthGuard } from "./services/auth.guard";
 
 @NgModule({
   declarations: [AppComponent, ContatoComponent],
@@ -23,7 +24,7 @@ import { AuthModule } from "./auth/auth.module";
     HttpClientModule,
     AuthModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
